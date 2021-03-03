@@ -1,4 +1,9 @@
 package com.gunnarsson.smartlighter.io.repositories;
 
-public class UserRepository {
+import com.gunnarsson.smartlighter.io.entity.UserEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
 }
