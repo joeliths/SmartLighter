@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-//@Entity(name="users")
+@Entity(name="users")
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 5012315223526710046L;
 
