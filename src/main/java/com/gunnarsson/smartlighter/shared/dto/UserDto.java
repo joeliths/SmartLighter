@@ -11,6 +11,7 @@ public class UserDto implements Serializable {
     private String userId;
     private String firstName;
     private String email;
+    private String password;
     private String encryptedPassword;
 
     public Long getId() {
@@ -51,5 +52,13 @@ public class UserDto implements Serializable {
 
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
