@@ -2,8 +2,8 @@ package com.gunnarsson.smartlighter.ui.controller;
 
 import com.gunnarsson.smartlighter.service.UserService;
 import com.gunnarsson.smartlighter.shared.dto.UserDto;
-import com.gunnarsson.smartlighter.ui.model.UserRequestModel;
-import com.gunnarsson.smartlighter.ui.model.UserResponseModel;
+import com.gunnarsson.smartlighter.ui.model.request.UserRequestModel;
+import com.gunnarsson.smartlighter.ui.model.response.UserResponseModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

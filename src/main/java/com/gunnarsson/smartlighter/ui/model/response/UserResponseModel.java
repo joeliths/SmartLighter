@@ -1,4 +1,4 @@
-package com.gunnarsson.smartlighter.ui.model;
+package com.gunnarsson.smartlighter.ui.model.response;
 
 public class UserResponseModel {
     private String firstName;

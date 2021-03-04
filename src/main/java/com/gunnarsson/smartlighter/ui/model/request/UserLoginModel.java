@@ -1,17 +1,8 @@
-package com.gunnarsson.smartlighter.ui.model;
+package com.gunnarsson.smartlighter.ui.model.request;
 
-public class UserRequestModel {
-    private String firstName;
+public class UserLoginModel {
     private String email;
     private String password;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getEmail() {
         return email;
