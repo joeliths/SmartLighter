@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,13 +23,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     Utils utils;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDto createUser(UserDto user) {
         UserEntity userEntity = new UserEntity();
         userEntity = new ModelMapper().map(user,UserEntity.class);
-
         userEntity.setUserId(utils.generateUserId(20));
-        userEntity.setEncryptedPassword(user.getPassword()); // TODO Create encrypted password
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         UserEntity savedUser = userRepository.save(userEntity);
 
         UserDto returnValue = new UserDto();
