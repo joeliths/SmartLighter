@@ -2,6 +2,8 @@ package com.gunnarsson.smartlighter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -11,9 +13,8 @@ public class SmartlighterApplication {
 		SpringApplication.run(SmartlighterApplication.class, args);
 	}
 
-	@RestController
-	public static class UserController {
-
-
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }
