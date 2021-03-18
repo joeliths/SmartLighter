@@ -1,6 +1,9 @@
 package com.gunnarsson.smartlighter.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gunnarsson.smartlighter.SpringApplicationContext;
+import com.gunnarsson.smartlighter.service.UserService;
+import com.gunnarsson.smartlighter.shared.dto.UserDto;
 import com.gunnarsson.smartlighter.ui.model.request.UserLoginModel;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -52,8 +55,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET).compact();
 
+        UserService userService = (UserService) SpringApplicationContext.getBean("userServiceImpl");
+        UserDto userDto = userService.findUserByEmail(userName);
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-
+        res.addHeader("UserID", userDto.getUserId());
     }
 }
 
