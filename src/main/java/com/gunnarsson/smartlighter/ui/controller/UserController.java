@@ -14,6 +14,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping
+    public String test(){return "test";}
 
     @PostMapping
     public UserResponseModel createUser(@RequestBody UserRequestModel userRequestModel){
