@@ -1,10 +1,8 @@
 package com.gunnarsson.smartlighter.io.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name="sites")
 public class SiteEntity implements Serializable {
@@ -19,6 +17,9 @@ public class SiteEntity implements Serializable {
 
     @Column(nullable = false)
     private String siteName;
+
+    @OneToMany(mappedBy="site")
+    private List<LightEntity> lights;
 
     public Long getId() {
         return id;

@@ -1,10 +1,9 @@
 package com.gunnarsson.smartlighter.io.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity(name = "lights")
 public class LightEntity implements Serializable {
@@ -22,6 +21,10 @@ public class LightEntity implements Serializable {
 
     @Column(nullable = false)
     private String ipAddress;
+
+    @ManyToOne
+    @JoinColumn(name="site_id")
+    private SiteEntity site;
 
     public Long getId() {
         return id;
@@ -54,4 +57,5 @@ public class LightEntity implements Serializable {
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
+
 }
