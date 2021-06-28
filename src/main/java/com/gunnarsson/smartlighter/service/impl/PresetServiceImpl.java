@@ -36,7 +36,7 @@ public class PresetServiceImpl implements PresetService {
 
         for(PresetDto presetDto:collectionPreset.getPresets()){
             presetDto.setCollectionPreset(collectionPreset);
-            presetDto.setPresetId(utils.generateId(10));
+            presetDto.setPresetId(utils.generatePresetId(10));
         }
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
