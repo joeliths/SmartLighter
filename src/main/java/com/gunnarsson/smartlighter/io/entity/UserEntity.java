@@ -1,12 +1,9 @@
 package com.gunnarsson.smartlighter.io.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name="users")
+@Entity(name="user")
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 5012315223526710046L;
 
@@ -25,6 +22,10 @@ public class UserEntity implements Serializable {
 
     @Column(nullable = false)
     private String encryptedPassword;
+
+    @ManyToOne
+    @JoinColumn(name="site_id")
+    private SiteEntity site;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class UserEntity implements Serializable {
 
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
+    }
+
+    public SiteEntity getSite() {
+        return site;
+    }
+
+    public void setSite(SiteEntity site) {
+        this.site = site;
     }
 }
