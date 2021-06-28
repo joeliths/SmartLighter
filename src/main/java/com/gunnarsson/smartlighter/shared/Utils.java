@@ -22,6 +22,10 @@ public class Utils {
 
         return new String(returnValue);
     }
+
+    public String generateLightId(int length) {return generateRandomString(length); }
+    public String generateCollectionPresetId(int length) {return generateRandomString(length); }
+    public String generatePresetId(int length) {return generateRandomString(length);}
 }
 
 
