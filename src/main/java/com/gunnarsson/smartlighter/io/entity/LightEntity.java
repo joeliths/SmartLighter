@@ -67,5 +67,4 @@ public class LightEntity implements Serializable {
         this.site = site;
     }
 
-
 }

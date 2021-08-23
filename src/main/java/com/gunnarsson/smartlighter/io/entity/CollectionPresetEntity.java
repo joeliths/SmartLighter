@@ -18,7 +18,6 @@ public class CollectionPresetEntity implements Serializable {
     @Column
     private String collectionName;
 
-
    @OneToMany(mappedBy="collectionPresetEntity")
     private List<PresetEntity> presets;
 
@@ -46,13 +45,12 @@ public class CollectionPresetEntity implements Serializable {
         this.collectionPresetId = presetId;
     }
 
-   public List<PresetEntity> getPresets() {
+    public List<PresetEntity> getPresets() {
         return presets;
     }
 
     public void setPresets(List<PresetEntity> presets) {
         this.presets = presets;
     }
-
 
 }

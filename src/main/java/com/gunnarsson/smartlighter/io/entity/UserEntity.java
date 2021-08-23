@@ -74,4 +74,5 @@ public class UserEntity implements Serializable {
     public void setSite(SiteEntity site) {
         this.site = site;
     }
+
 }

@@ -63,4 +63,5 @@ public class SiteEntity implements Serializable {
     public void setUsers(List<UserEntity> users) {
         this.users = users;
     }
+
 }
