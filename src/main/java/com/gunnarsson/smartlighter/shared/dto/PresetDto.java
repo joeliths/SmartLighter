@@ -44,7 +44,7 @@ public class PresetDto implements Serializable {
         return presetId;
     }
 
-    public void setPresetId(String presetId) {
-        this.presetId = presetId;
+    public void setPresetId(String presetId) { this.presetId = presetId;
     }
+
 }
