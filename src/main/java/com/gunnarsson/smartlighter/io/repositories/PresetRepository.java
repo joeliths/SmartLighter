@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PresetRepository extends CrudRepository<PresetEntity,Long> {
-    //PresetEntity findPresetById();
 }
