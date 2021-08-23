@@ -44,7 +44,6 @@ public class LightController {
 
     @PostMapping
     public LightResponseModel createLight(@RequestBody LightRequestModel lightRequestModel){
-
         LightDto lightDto = new ModelMapper().map(lightRequestModel,LightDto.class);
         LightDto createdLight = lightService.createLight(lightDto);
         return new ModelMapper().map(createdLight,LightResponseModel.class);
@@ -53,16 +52,21 @@ public class LightController {
     @PostMapping(path = "preset",consumes= MediaType.APPLICATION_JSON_VALUE)
     public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
         CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
-        // move below to helpMethod
-        List<PresetDto>presetDtos = new ArrayList<>();
-        for(LightStateModel lightStateModel: presetLightsRequestModel.getPresets()){
-             PresetDto presetDto = new PresetDto();
-             presetDto.setOn(lightStateModel.isOn());
-            presetDto.setLight(lightService.findLightByLightId(lightStateModel.getLightId()));
-        }
-        collectionPresetDto.setPresets(presetDtos);
+        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
         collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
         CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
         return createdCollectionPreset;
     }
+
+    private List<PresetDto> SetPresetsToCollectionPreset(List<LightStateModel> presets){
+        List<PresetDto>presetDtos = new ArrayList<>();
+        for(LightStateModel lightStateModel: presets){
+            PresetDto presetDto = new PresetDto();
+            presetDto.setOn(lightStateModel.isOn());
+            presetDto.setLight(lightService.findLightByLightId(lightStateModel.getLightId()));
+            presetDtos.add(presetDto);
+        }
+        return presetDtos;
+    }
+
 }
