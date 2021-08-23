@@ -10,7 +10,6 @@ public class PresetDto implements Serializable {
     private boolean on;
     private CollectionPresetDto collectionPreset;
 
-
     public Long getId() {
         return id;
     }
@@ -27,9 +26,7 @@ public class PresetDto implements Serializable {
         this.on = on;
     }
 
-    public LightDto getLight() {
-        return light;
-    }
+    public LightDto getLight() { return light; }
 
     public void setLight(LightDto light) {
         this.light = light;
