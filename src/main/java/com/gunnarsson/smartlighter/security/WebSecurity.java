@@ -23,6 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL).permitAll()
+                .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .anyRequest().authenticated().and()
                 .addFilter(getAuthenticationFilter())
                 .addFilter(new AuthorizationFilter(authenticationManager()))
@@ -40,4 +41,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         filter.setFilterProcessesUrl("/users/login");
         return filter;
     }
+
+    private static final String[] SWAGGER_WHITELIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+    };
 }
