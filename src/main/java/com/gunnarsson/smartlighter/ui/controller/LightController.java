@@ -73,6 +73,13 @@ public class LightController {
         return response;
     }
 
+    @PutMapping(path = "/{id}")
+    public LightResponseModel updateLight(@PathVariable String id, @RequestBody LightRequestModel lightRequestModel){
+        LightDto lightDto = new ModelMapper().map(lightRequestModel,LightDto.class);
+        LightDto updatedLight  = lightService.updateLight(id,lightDto);
+        return new ModelMapper().map(updatedLight,LightResponseModel.class);
+    }
+
     private List<PresetDto> SetPresetsToCollectionPreset(List<LightStateModel> presets){
         List<PresetDto>presetDtos = new ArrayList<>();
         for(LightStateModel lightStateModel: presets){

@@ -66,4 +66,13 @@ public class LightServiceImpl implements LightService {
         List<LightDto> lightDtoList = new ModelMapper().map(lights,listType);
         return lightDtoList;
     }
+
+    @Override
+    public LightDto updateLight(String lightId, LightDto lightDto) {
+        LightEntity lightEntity = lightRepository.findLightByLightId(lightId);
+        lightEntity.setLightName(lightDto.getLightName());
+        lightEntity.setIpAddress(lightDto.getIpAddress());
+        LightEntity updatedLight = lightRepository.save(lightEntity);
+        return new ModelMapper().map(updatedLight,LightDto.class);
+    }
 }

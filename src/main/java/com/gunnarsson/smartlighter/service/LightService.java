@@ -11,4 +11,5 @@ public interface LightService {
     String turnOn(String id);
     String turnOff(String lightId);
     List<LightDto> getAllLights();
+    LightDto updateLight(String lightId, LightDto lightDto);
 }
