@@ -65,8 +65,8 @@ public class LightController {
         return createdCollectionPreset;
     }
 
-    @DeleteMapping
-    public Map<String, Boolean> deleteLight (@RequestParam String lightId){
+    @DeleteMapping(path = "/{id}")
+    public Map<String, Boolean> deleteLight (@PathVariable String lightId){
         lightService.deleteLight(lightId);
         Map<String, Boolean> response = new HashMap<>();
         response.put(lightId, Boolean.TRUE);
