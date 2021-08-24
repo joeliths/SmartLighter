@@ -8,5 +8,6 @@ public interface LightService {
     LightDto findLightByLightId(String lightId);
     LightDto createLight(LightDto light);
     String turnOn(String id);
+    String turnOff(String lightId);
     List<LightDto> getAllLights();
 }
