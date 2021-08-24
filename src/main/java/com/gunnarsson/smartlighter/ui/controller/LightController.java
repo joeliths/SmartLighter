@@ -42,6 +42,11 @@ public class LightController {
         return lightService.turnOn(lightId);
     }
 
+    @GetMapping(path = "off")
+    public String turnOffLight(@RequestParam String lightId){
+        return lightService.turnOff(lightId);
+    }
+
     @PostMapping
     public LightResponseModel createLight(@RequestBody LightRequestModel lightRequestModel){
         LightDto lightDto = new ModelMapper().map(lightRequestModel,LightDto.class);
