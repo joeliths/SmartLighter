@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -22,5 +25,13 @@ public class UserController {
         UserDto userDto = new ModelMapper().map(userRequestModel,UserDto.class);
         UserDto createdUser = userService.createUser(userDto);
         return new ModelMapper().map(createdUser,UserResponseModel.class);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public Map<String,Boolean> deleteUser(@PathVariable String userId){
+        userService.deleteUser(userId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put(userId, Boolean.TRUE);
+        return response;
     }
 }
