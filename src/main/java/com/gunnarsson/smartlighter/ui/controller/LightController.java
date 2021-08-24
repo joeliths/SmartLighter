@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/lights")
@@ -61,6 +63,14 @@ public class LightController {
         collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
         CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
         return createdCollectionPreset;
+    }
+
+    @DeleteMapping
+    public Map<String, Boolean> deleteLight (@RequestParam String lightId){
+        lightService.deleteLight(lightId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put(lightId, Boolean.TRUE);
+        return response;
     }
 
     private List<PresetDto> SetPresetsToCollectionPreset(List<LightStateModel> presets){
