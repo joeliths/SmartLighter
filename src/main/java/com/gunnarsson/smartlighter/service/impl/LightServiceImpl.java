@@ -40,6 +40,12 @@ public class LightServiceImpl implements LightService {
     }
 
     @Override
+    public void deleteLight(LightDto light) {
+        LightEntity lightEntity = new ModelMapper().map(light,LightEntity.class);
+        lightRepository.delete(lightEntity);
+    }
+
+    @Override
     public String turnOn(String lightId) {
        LightEntity light = lightRepository.findLightByLightId(lightId);
         LightDto lightDto = new ModelMapper().map(light,LightDto.class);
