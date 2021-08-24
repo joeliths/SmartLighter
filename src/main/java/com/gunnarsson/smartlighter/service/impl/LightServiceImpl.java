@@ -3,6 +3,7 @@ package com.gunnarsson.smartlighter.service.impl;
 import com.gunnarsson.smartlighter.io.entity.LightEntity;
 import com.gunnarsson.smartlighter.io.repositories.LightRepository;
 import com.gunnarsson.smartlighter.service.LightService;
+import com.gunnarsson.smartlighter.service.command.impl.LightOffCommand;
 import com.gunnarsson.smartlighter.service.command.impl.LightOnCommand;
 import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
@@ -43,6 +44,13 @@ public class LightServiceImpl implements LightService {
        LightEntity light = lightRepository.findLightByLightId(lightId);
         LightDto lightDto = new ModelMapper().map(light,LightDto.class);
         return new LightOnCommand(lightDto).execute();
+    }
+
+    @Override
+    public String turnOff(String lightId) {
+        LightEntity light = lightRepository.findLightByLightId(lightId);
+        LightDto lightDto = new ModelMapper().map(light,LightDto.class);
+        return new LightOffCommand(lightDto).execute();
     }
 
     @Override
