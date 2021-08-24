@@ -33,6 +33,13 @@ public class UserController {
         return new ModelMapper().map(userDto,UserResponseModel.class);
     }
 
+    @PutMapping(path = "/{id}")
+    public UserResponseModel updateUser(@PathVariable String id, @RequestBody UserRequestModel userRequestModel){
+        UserDto userDto = new ModelMapper().map(userRequestModel,UserDto.class);
+        UserDto updatedUser = userService.updateUser(id,userDto);
+        return new ModelMapper().map(updatedUser,UserResponseModel.class);
+    }
+
     @DeleteMapping(path = "/{id}")
     public Map<String,Boolean> deleteUser(@PathVariable String userId){
         userService.deleteUser(userId);
