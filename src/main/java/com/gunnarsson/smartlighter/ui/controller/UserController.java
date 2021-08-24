@@ -27,6 +27,12 @@ public class UserController {
         return new ModelMapper().map(createdUser,UserResponseModel.class);
     }
 
+    @GetMapping(path = "/{id}")
+    public UserResponseModel findUserById(@PathVariable String id){
+        UserDto userDto = userService.findUserByUserId(id);
+        return new ModelMapper().map(userDto,UserResponseModel.class);
+    }
+
     @DeleteMapping(path = "/{id}")
     public Map<String,Boolean> deleteUser(@PathVariable String userId){
         userService.deleteUser(userId);
