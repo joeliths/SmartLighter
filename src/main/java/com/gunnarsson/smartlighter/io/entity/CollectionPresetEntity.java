@@ -12,10 +12,10 @@ public class CollectionPresetEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String collectionPresetId;
 
-    @Column
+    @Column(nullable=false, length=30)
     private String collectionName;
 
    @OneToMany(mappedBy="collectionPresetEntity")
