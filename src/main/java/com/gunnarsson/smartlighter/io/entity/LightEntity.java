@@ -16,7 +16,7 @@ public class LightEntity implements Serializable {
     @Column(nullable = false)
     private String lightId;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 30)
     private String lightName;
 
     @Column(nullable = false)
