@@ -11,7 +11,7 @@ public class PresetEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String presetId;
 
     @ManyToOne
@@ -20,7 +20,6 @@ public class PresetEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="collection_id")
-
     private CollectionPresetEntity collectionPresetEntity;
 
     @Column

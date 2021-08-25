@@ -15,7 +15,7 @@ public class SiteEntity implements Serializable {
     @Column(nullable = false)
     private String siteId;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 30)
     private String siteName;
 
     @OneToMany(mappedBy="site")
