@@ -1,10 +1,12 @@
 package com.gunnarsson.smartlighter.service.impl;
 
+import com.gunnarsson.smartlighter.exceptions.UserServiceException;
 import com.gunnarsson.smartlighter.io.entity.UserEntity;
 import com.gunnarsson.smartlighter.io.repositories.UserRepository;
 import com.gunnarsson.smartlighter.service.UserService;
 import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.UserDto;
+import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findUserByEmail(String email) {
         UserEntity userEntity = userRepository.findUserByEmail(email);
-        if(userEntity== null) throw new UsernameNotFoundException(email);
+        if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         UserDto returnValue = new ModelMapper().map(userEntity,UserDto.class);
         return returnValue;
     }
@@ -47,18 +49,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String userId) {
         UserEntity userEntity = userRepository.findUserByUserId(userId);
+        if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         userRepository.delete(userEntity);
     }
 
     @Override
     public UserDto findUserByUserId(String userId) {
         UserEntity userEntity = userRepository.findUserByUserId(userId);
+        if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         return new ModelMapper().map(userEntity,UserDto.class);
     }
 
     @Override
     public UserDto updateUser(String userId, UserDto userDto) {
         UserEntity userEntity = userRepository.findUserByUserId(userId);
+        if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setFirstName(userDto.getFirstName());
         return new ModelMapper().map(userEntity,UserDto.class);
@@ -67,7 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findUserByEmail(email);
-        if(userEntity== null) throw new UsernameNotFoundException(email);
+        if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         return new User(userEntity.getEmail(),userEntity.getEncryptedPassword(),new ArrayList<>());
     }
 }
