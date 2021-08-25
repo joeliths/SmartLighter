@@ -1,5 +1,6 @@
 package com.gunnarsson.smartlighter.service.impl;
 
+import com.gunnarsson.smartlighter.exceptions.PresetServiceException;
 import com.gunnarsson.smartlighter.io.entity.CollectionPresetEntity;
 import com.gunnarsson.smartlighter.io.entity.PresetEntity;
 import com.gunnarsson.smartlighter.io.repositories.CollectionPresetRepository;
@@ -11,11 +12,14 @@ import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
 import com.gunnarsson.smartlighter.shared.dto.PresetDto;
+import com.gunnarsson.smartlighter.ui.model.response.ErrorMessage;
+import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +54,7 @@ public class PresetServiceImpl implements PresetService {
     @Override
     public List<String> executePreset(String collectionPresetId) {
         CollectionPresetEntity collectionPresetEntity = collectionPresetRepository.findPresetBycollectionPresetId(collectionPresetId);
+        if (collectionPresetEntity == null) throw new PresetServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         List<String> returnValue = new ArrayList<>();
         for (PresetEntity presetEntity : collectionPresetEntity.getPresets()) {
             returnValue.add(createCommand(presetEntity));
