@@ -33,11 +33,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setUserId(utils.generateUserId(20));
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         UserEntity savedUser = userRepository.save(userEntity);
-
-        UserDto returnValue = new UserDto();
-        returnValue = new ModelMapper().map(savedUser,UserDto.class);
-
-        return returnValue;
+        return new ModelMapper().map(savedUser,UserDto.class);
     }
 
     @Override
