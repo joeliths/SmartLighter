@@ -1,5 +1,6 @@
 package com.gunnarsson.smartlighter.service.impl;
 
+import com.gunnarsson.smartlighter.exceptions.LightServiceException;
 import com.gunnarsson.smartlighter.io.entity.LightEntity;
 import com.gunnarsson.smartlighter.io.repositories.LightRepository;
 import com.gunnarsson.smartlighter.service.LightService;
@@ -7,6 +8,7 @@ import com.gunnarsson.smartlighter.service.command.impl.LightOffCommand;
 import com.gunnarsson.smartlighter.service.command.impl.LightOnCommand;
 import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
+import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class LightServiceImpl implements LightService {
     @Override
     public LightDto findLightByLightId(String lightId) {
         LightEntity lightEntity = lightRepository.findLightByLightId(lightId);
+        if(lightEntity == null) throw new LightServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         return new ModelMapper().map(lightEntity,LightDto.class);
     }
 
@@ -48,6 +51,7 @@ public class LightServiceImpl implements LightService {
     @Override
     public String turnOn(String lightId) {
        LightEntity light = lightRepository.findLightByLightId(lightId);
+        if(light == null) throw new LightServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         LightDto lightDto = new ModelMapper().map(light,LightDto.class);
         return new LightOnCommand(lightDto).execute();
     }
@@ -55,6 +59,7 @@ public class LightServiceImpl implements LightService {
     @Override
     public String turnOff(String lightId) {
         LightEntity light = lightRepository.findLightByLightId(lightId);
+        if(light == null) throw new LightServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         LightDto lightDto = new ModelMapper().map(light,LightDto.class);
         return new LightOffCommand(lightDto).execute();
     }
@@ -70,6 +75,7 @@ public class LightServiceImpl implements LightService {
     @Override
     public LightDto updateLight(String lightId, LightDto lightDto) {
         LightEntity lightEntity = lightRepository.findLightByLightId(lightId);
+        if(lightEntity == null) throw new LightServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         lightEntity.setLightName(lightDto.getLightName());
         lightEntity.setIpAddress(lightDto.getIpAddress());
         LightEntity updatedLight = lightRepository.save(lightEntity);
