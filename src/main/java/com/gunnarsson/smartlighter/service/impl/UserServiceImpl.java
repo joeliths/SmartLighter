@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto user) {
-        UserEntity userEntity = new UserEntity();
-        userEntity = new ModelMapper().map(user,UserEntity.class);
+        UserEntity userEntity = new ModelMapper().map(user,UserEntity.class);
         userEntity.setUserId(utils.generateUserId(20));
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         UserEntity savedUser = userRepository.save(userEntity);
