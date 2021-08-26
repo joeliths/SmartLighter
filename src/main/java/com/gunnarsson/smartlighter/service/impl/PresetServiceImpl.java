@@ -12,7 +12,6 @@ import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
 import com.gunnarsson.smartlighter.shared.dto.PresetDto;
-import com.gunnarsson.smartlighter.ui.model.response.ErrorMessage;
 import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
