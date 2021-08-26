@@ -65,7 +65,8 @@ public class UserServiceImpl implements UserService {
         if(userEntity == null) throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setFirstName(userDto.getFirstName());
-        return new ModelMapper().map(userEntity,UserDto.class);
+        UserEntity updatedUser = userRepository.save(userEntity);
+        return new ModelMapper().map(updatedUser,UserDto.class);
     }
 
     @Override
