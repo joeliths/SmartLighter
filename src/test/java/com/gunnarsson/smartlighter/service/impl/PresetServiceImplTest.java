@@ -62,18 +62,12 @@ class PresetServiceImplTest {
         when(utils.generateCollectionPresetId(anyInt())).thenReturn(collectionPresetEntity.getCollectionPresetId());//
         when(collectionPresetRepository.save(any(CollectionPresetEntity.class))).thenReturn(collectionPresetEntity);
 
-
-
         CollectionPresetDto savedCollectionPresetDto = presetService.createCollectionPreset(collectionPresetDto);
 
         assertNotNull(savedCollectionPresetDto);
         assertEquals(collectionPresetEntity.getCollectionName(),savedCollectionPresetDto.getCollectionName());
         assertEquals(collectionPresetEntity.getCollectionPresetId(),savedCollectionPresetDto.getCollectionPresetId());
         assertEquals(collectionPresetEntity.getPresets().size(),savedCollectionPresetDto.getPresets().size());
-    }
-
-    @Test
-    void executePreset() {
     }
 
     private void setCollectionPresetDtoValues() {
