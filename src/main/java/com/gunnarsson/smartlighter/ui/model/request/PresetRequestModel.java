@@ -7,7 +7,6 @@ public class PresetRequestModel {
     private String presetId;
     private LightDto light;
     private boolean on;
-    private CollectionPresetDto collectionPreset;
 
     public String getPresetId() {
         return presetId;
@@ -33,11 +32,4 @@ public class PresetRequestModel {
         this.on = on;
     }
 
-    public CollectionPresetDto getCollectionPreset() {
-        return collectionPreset;
-    }
-
-    public void setCollectionPreset(CollectionPresetDto collectionPreset) {
-        this.collectionPreset = collectionPreset;
-    }
 }
