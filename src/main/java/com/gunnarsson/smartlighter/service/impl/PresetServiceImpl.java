@@ -14,9 +14,12 @@ import com.gunnarsson.smartlighter.shared.dto.LightDto;
 import com.gunnarsson.smartlighter.shared.dto.PresetDto;
 import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,14 @@ public class PresetServiceImpl implements PresetService {
 
     @Autowired
     Utils utils;
+
+    @Override
+    public List<CollectionPresetDto> getAllCollectionPresets() {
+        List<CollectionPresetEntity> collectionPresets = (List<CollectionPresetEntity>) collectionPresetRepository.findAll();
+        Type listType = new TypeToken<List<CollectionPresetDto>>(){}.getType();
+        List<CollectionPresetDto> collectionPresetDtoList = new ModelMapper().map(collectionPresets,listType);
+        return collectionPresetDtoList;
+    }
 
     @Override
     public CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPreset) {
