@@ -7,6 +7,7 @@ import com.gunnarsson.smartlighter.service.LightService;
 import com.gunnarsson.smartlighter.service.command.impl.LightOffCommand;
 import com.gunnarsson.smartlighter.service.command.impl.LightOnCommand;
 import com.gunnarsson.smartlighter.shared.Utils;
+import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
 import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
@@ -81,4 +82,6 @@ public class LightServiceImpl implements LightService {
         LightEntity updatedLight = lightRepository.save(lightEntity);
         return new ModelMapper().map(updatedLight,LightDto.class);
     }
+
+
 }
