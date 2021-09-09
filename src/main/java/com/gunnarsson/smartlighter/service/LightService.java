@@ -1,5 +1,6 @@
 package com.gunnarsson.smartlighter.service;
 
+import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
 
 import java.util.List;
