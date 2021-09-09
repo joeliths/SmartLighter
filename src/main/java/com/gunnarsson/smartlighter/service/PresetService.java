@@ -7,4 +7,5 @@ import java.util.List;
 public interface PresetService {
     CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPreset);
     List<String> executePreset(String collectionPresetId);
+    List<CollectionPresetDto> getAllCollectionPresets();
 }
