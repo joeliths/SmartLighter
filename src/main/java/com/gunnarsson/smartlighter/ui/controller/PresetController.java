@@ -29,8 +29,6 @@ public class PresetController {
     @Autowired
     PresetService presetService;
 
-
-
     @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
     public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
         CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
