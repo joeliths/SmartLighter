@@ -68,7 +68,6 @@ public class PresetServiceImpl implements PresetService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         CollectionPresetEntity collectionPresetEntity = modelMapper.map(collectionPreset,CollectionPresetEntity.class);
         collectionPresetEntity.setCollectionPresetId(utils.generateCollectionPresetId(10));
-
         CollectionPresetEntity savedCollection = collectionPresetRepository.save(collectionPresetEntity);
         return modelMapper.map(savedCollection,CollectionPresetDto.class);
     }
