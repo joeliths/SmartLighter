@@ -30,12 +30,12 @@ public class PresetController {
     PresetService presetService;
 
     @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
-    public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
+    public CollectionPresetResponseModel createCollectionPreset(@RequestBody PresetLightsRequestModel presetLightsRequestModel){
         CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
         collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
         collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
         CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
-        return createdCollectionPreset;
+        return new ModelMapper().map(createdCollectionPreset,CollectionPresetResponseModel.class);
     }
 
     @PutMapping(path = "/{id}")
