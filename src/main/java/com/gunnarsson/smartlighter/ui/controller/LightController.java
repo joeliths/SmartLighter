@@ -8,6 +8,7 @@ import com.gunnarsson.smartlighter.shared.dto.PresetDto;
 import com.gunnarsson.smartlighter.ui.model.request.LightRequestModel;
 import com.gunnarsson.smartlighter.ui.model.request.LightStateModel;
 import com.gunnarsson.smartlighter.ui.model.request.PresetLightsRequestModel;
+import com.gunnarsson.smartlighter.ui.model.response.CollectionPresetResponseModel;
 import com.gunnarsson.smartlighter.ui.model.response.LightResponseModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -54,6 +55,14 @@ public class LightController {
         LightDto lightDto = new ModelMapper().map(lightRequestModel,LightDto.class);
         LightDto createdLight = lightService.createLight(lightDto);
         return new ModelMapper().map(createdLight,LightResponseModel.class);
+    }
+
+    @GetMapping(path = "collection")
+    public List<CollectionPresetResponseModel> getAllCollectionPresets(){
+        List<CollectionPresetDto> collectionPresetDtoList = presetService.getAllCollectionPresets();
+        Type listType = new TypeToken<List<CollectionPresetResponseModel>>(){}.getType();
+        List<CollectionPresetResponseModel> collectionPresetResponseModelList = new ModelMapper().map(collectionPresetDtoList,listType);
+        return collectionPresetResponseModelList;
     }
 
     @PostMapping(path = "preset",consumes= MediaType.APPLICATION_JSON_VALUE)
