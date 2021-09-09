@@ -38,6 +38,12 @@ public class LightController {
         return new ModelMapper().map(lightDtoList,listType);
     }
 
+    @GetMapping(path = "/{id}")
+    public LightResponseModel findLightByLightId(@PathVariable String id){
+        LightDto lightDto = lightService.findLightByLightId(id);
+        return new ModelMapper().map(lightDto,LightResponseModel.class);
+    }
+
     @GetMapping(path = "on")
     public String turnOnLight(@RequestParam String lightId){
         return lightService.turnOn(lightId);
