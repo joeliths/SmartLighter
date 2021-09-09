@@ -30,8 +30,6 @@ public class LightController {
     @Autowired
     LightService lightService;
 
-    @Autowired
-    PresetService presetService;
 
     @GetMapping
     public List<LightResponseModel> getAllLights(){
@@ -57,23 +55,6 @@ public class LightController {
         return new ModelMapper().map(createdLight,LightResponseModel.class);
     }
 
-    @GetMapping(path = "collection")
-    public List<CollectionPresetResponseModel> getAllCollectionPresets(){
-        List<CollectionPresetDto> collectionPresetDtoList = presetService.getAllCollectionPresets();
-        Type listType = new TypeToken<List<CollectionPresetResponseModel>>(){}.getType();
-        List<CollectionPresetResponseModel> collectionPresetResponseModelList = new ModelMapper().map(collectionPresetDtoList,listType);
-        return collectionPresetResponseModelList;
-    }
-
-    @PostMapping(path = "preset",consumes= MediaType.APPLICATION_JSON_VALUE)
-    public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
-        CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
-        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
-        collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
-        CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
-        return createdCollectionPreset;
-    }
-
     @DeleteMapping(path = "/{id}")
     public Map<String, Boolean> deleteLight (@PathVariable String lightId){
         lightService.deleteLight(lightId);
@@ -87,17 +68,6 @@ public class LightController {
         LightDto lightDto = new ModelMapper().map(lightRequestModel,LightDto.class);
         LightDto updatedLight  = lightService.updateLight(id,lightDto);
         return new ModelMapper().map(updatedLight,LightResponseModel.class);
-    }
-
-    private List<PresetDto> SetPresetsToCollectionPreset(List<LightStateModel> presets){
-        List<PresetDto>presetDtos = new ArrayList<>();
-        for(LightStateModel lightStateModel: presets){
-            PresetDto presetDto = new PresetDto();
-            presetDto.setOn(lightStateModel.isOn());
-            presetDto.setLight(lightService.findLightByLightId(lightStateModel.getLightId()));
-            presetDtos.add(presetDto);
-        }
-        return presetDtos;
     }
 
 }
