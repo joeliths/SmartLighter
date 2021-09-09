@@ -2,9 +2,11 @@ package com.gunnarsson.smartlighter.service.impl;
 
 import com.gunnarsson.smartlighter.exceptions.PresetServiceException;
 import com.gunnarsson.smartlighter.io.entity.CollectionPresetEntity;
+import com.gunnarsson.smartlighter.io.entity.LightEntity;
 import com.gunnarsson.smartlighter.io.entity.PresetEntity;
 import com.gunnarsson.smartlighter.io.repositories.CollectionPresetRepository;
 import com.gunnarsson.smartlighter.io.repositories.LightRepository;
+import com.gunnarsson.smartlighter.io.repositories.PresetRepository;
 import com.gunnarsson.smartlighter.service.PresetService;
 import com.gunnarsson.smartlighter.service.command.impl.LightOffCommand;
 import com.gunnarsson.smartlighter.service.command.impl.LightOnCommand;
@@ -30,6 +32,9 @@ public class PresetServiceImpl implements PresetService {
     CollectionPresetRepository collectionPresetRepository;
 
     @Autowired
+    PresetRepository presetRepository;
+
+    @Autowired
     LightRepository lightRepository;
 
     @Autowired
@@ -41,6 +46,15 @@ public class PresetServiceImpl implements PresetService {
         Type listType = new TypeToken<List<CollectionPresetDto>>(){}.getType();
         List<CollectionPresetDto> collectionPresetDtoList = new ModelMapper().map(collectionPresets,listType);
         return collectionPresetDtoList;
+    }
+
+    @Override
+    public PresetDto updatePreset(String id,PresetDto presetDto) {
+        PresetEntity presetEntity = presetRepository.findPresetByPresetId(id);
+        if (presetEntity == null) throw new PresetServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+        presetEntity.setLighted(presetDto.isOn());
+        PresetEntity updatedPreset = presetRepository.save(presetEntity);
+        return new ModelMapper().map(updatedPreset,PresetDto.class);
     }
 
     @Override

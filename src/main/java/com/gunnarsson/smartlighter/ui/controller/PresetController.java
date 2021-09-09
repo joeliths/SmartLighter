@@ -6,7 +6,9 @@ import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.PresetDto;
 import com.gunnarsson.smartlighter.ui.model.request.LightStateModel;
 import com.gunnarsson.smartlighter.ui.model.request.PresetLightsRequestModel;
+import com.gunnarsson.smartlighter.ui.model.request.PresetRequestModel;
 import com.gunnarsson.smartlighter.ui.model.response.CollectionPresetResponseModel;
+import com.gunnarsson.smartlighter.ui.model.response.PresetResponseModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,25 @@ public class PresetController {
     @Autowired
     PresetService presetService;
 
+
+
+    @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
+    public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
+        CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
+        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
+        collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
+        CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
+        return createdCollectionPreset;
+    }
+
+    @PutMapping(path = "/{id}")
+    public PresetResponseModel updatePreset(@PathVariable String id,@RequestBody PresetRequestModel presetRequestModel){
+        PresetDto presetDto = new ModelMapper().map(presetRequestModel,PresetDto.class);
+        PresetDto updatedPreset = presetService.updatePreset(id,presetDto);
+        return new ModelMapper().map(updatedPreset,PresetResponseModel.class);
+    }
+
+
     @GetMapping(path = "collection")
     public List<CollectionPresetResponseModel> getAllCollectionPresets(){
         List<CollectionPresetDto> collectionPresetDtoList = presetService.getAllCollectionPresets();
@@ -35,14 +56,6 @@ public class PresetController {
         return collectionPresetResponseModelList;
     }
 
-    @PostMapping(path = "preset",consumes= MediaType.APPLICATION_JSON_VALUE)
-    public CollectionPresetDto createPreset (@RequestBody PresetLightsRequestModel presetLightsRequestModel){
-        CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
-        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
-        collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
-        CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
-        return createdCollectionPreset;
-    }
 
     private List<PresetDto> SetPresetsToCollectionPreset(List<LightStateModel> presets){
         List<PresetDto>presetDtos = new ArrayList<>();
@@ -54,4 +67,6 @@ public class PresetController {
         }
         return presetDtos;
     }
+
+
 }
