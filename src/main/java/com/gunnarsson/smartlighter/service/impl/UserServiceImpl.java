@@ -8,6 +8,7 @@ import com.gunnarsson.smartlighter.shared.Utils;
 import com.gunnarsson.smartlighter.shared.dto.UserDto;
 import com.gunnarsson.smartlighter.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -68,6 +71,15 @@ public class UserServiceImpl implements UserService {
         UserEntity updatedUser = userRepository.save(userEntity);
         return new ModelMapper().map(updatedUser,UserDto.class);
     }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<UserEntity> users = (List<UserEntity>)userRepository.findAll();
+        Type listType = new TypeToken<List<UserDto>>(){}.getType();
+        List<UserDto> userDtoList = new ModelMapper().map(users,listType);
+        return userDtoList;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
