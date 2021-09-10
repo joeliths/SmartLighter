@@ -1,25 +1,14 @@
 package com.gunnarsson.smartlighter.ui.controller;
 
 import com.gunnarsson.smartlighter.service.LightService;
-import com.gunnarsson.smartlighter.service.PresetService;
-import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.LightDto;
-import com.gunnarsson.smartlighter.shared.dto.PresetDto;
 import com.gunnarsson.smartlighter.ui.model.request.LightRequestModel;
-import com.gunnarsson.smartlighter.ui.model.request.LightStateModel;
-import com.gunnarsson.smartlighter.ui.model.request.PresetLightsRequestModel;
-import com.gunnarsson.smartlighter.ui.model.response.CollectionPresetResponseModel;
 import com.gunnarsson.smartlighter.ui.model.response.LightResponseModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
-
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
