@@ -58,6 +58,12 @@ public class PresetServiceImpl implements PresetService {
     }
 
     @Override
+    public void deleteLight(String collectionPresetId) {
+        CollectionPresetEntity collectionPresetEntity = collectionPresetRepository.findPresetBycollectionPresetId(collectionPresetId);
+        collectionPresetRepository.delete(collectionPresetEntity);
+    }
+
+    @Override
     public CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPreset) {
 
         for(PresetDto presetDto:collectionPreset.getPresets()){

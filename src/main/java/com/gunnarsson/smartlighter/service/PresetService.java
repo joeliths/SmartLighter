@@ -10,4 +10,5 @@ public interface PresetService {
     List<String> executePreset(String collectionPresetId);
     List<CollectionPresetDto> getAllCollectionPresets();
     PresetDto updatePreset(String id,PresetDto presetDto);
+    void deleteLight(String collectionPresetId);
 }

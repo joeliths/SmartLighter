@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/presets")
@@ -52,6 +54,14 @@ public class PresetController {
         Type listType = new TypeToken<List<CollectionPresetResponseModel>>(){}.getType();
         List<CollectionPresetResponseModel> collectionPresetResponseModelList = new ModelMapper().map(collectionPresetDtoList,listType);
         return collectionPresetResponseModelList;
+    }
+
+    @DeleteMapping(path = "collection/{id}")
+    public Map<String, Boolean> deleteCollectionPreset (@PathVariable String collectionPresetId){
+        presetService.deleteLight(collectionPresetId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put(collectionPresetId, Boolean.TRUE);
+        return response;
     }
 
 
