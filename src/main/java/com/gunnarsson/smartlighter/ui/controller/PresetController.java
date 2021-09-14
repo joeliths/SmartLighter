@@ -31,7 +31,7 @@ public class PresetController {
     @Autowired
     PresetService presetService;
 
-    @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "collection",consumes= MediaType.APPLICATION_JSON_VALUE)
     public CollectionPresetResponseModel createCollectionPreset(@RequestBody PresetLightsRequestModel presetLightsRequestModel){
         CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
         collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
