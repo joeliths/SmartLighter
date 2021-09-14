@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public Map<String,Boolean> deleteUser(@PathVariable String userId){
+    public Map<String,Boolean> deleteUser(@PathVariable(value = "id") String userId){
         userService.deleteUser(userId);
         Map<String, Boolean> response = new HashMap<>();
         response.put(userId, Boolean.TRUE);

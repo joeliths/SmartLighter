@@ -51,7 +51,7 @@ public class LightController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public Map<String, Boolean> deleteLight (@PathVariable String lightId){
+    public Map<String, Boolean> deleteLight (@PathVariable(value = "id") String lightId){
         lightService.deleteLight(lightId);
         Map<String, Boolean> response = new HashMap<>();
         response.put(lightId, Boolean.TRUE);
