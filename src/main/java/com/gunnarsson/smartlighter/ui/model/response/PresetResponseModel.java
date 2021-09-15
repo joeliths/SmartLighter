@@ -3,15 +3,15 @@ package com.gunnarsson.smartlighter.ui.model.response;
 
 public class PresetResponseModel {
     private String presetId;
-    private LightResponseModel lightResponseModel;
+    private LightResponseModel light;
     private boolean on;
 
-    public LightResponseModel getLightResponseModel() {
-        return lightResponseModel;
+    public LightResponseModel getLight() {
+        return light;
     }
 
-    public void setLightResponseModel(LightResponseModel lightResponseModel) {
-        this.lightResponseModel = lightResponseModel;
+    public void setLight(LightResponseModel light) {
+        this.light = light;
     }
 
     public String getPresetId() {
