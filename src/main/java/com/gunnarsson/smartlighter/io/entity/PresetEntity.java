@@ -20,7 +20,7 @@ public class PresetEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="collection_id")
-    private CollectionPresetEntity collectionPresetEntity;
+    private CollectionPresetEntity collectionPreset;
 
     @Column
     private boolean lighted;
@@ -41,12 +41,12 @@ public class PresetEntity implements Serializable {
         this.light = light;
     }
 
-    public CollectionPresetEntity getCollectionPresetEntity() {
-        return collectionPresetEntity;
+    public CollectionPresetEntity getCollectionPreset() {
+        return collectionPreset;
     }
 
-    public void setCollectionPresetEntity(CollectionPresetEntity collectionPresetEntity) {
-        this.collectionPresetEntity = collectionPresetEntity;
+    public void setCollectionPreset(CollectionPresetEntity collectionPreset) {
+        this.collectionPreset = collectionPreset;
     }
 
     public Long getId() {
