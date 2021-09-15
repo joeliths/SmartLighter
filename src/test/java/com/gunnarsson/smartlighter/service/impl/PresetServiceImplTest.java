@@ -94,15 +94,15 @@ class PresetServiceImplTest {
     private void setPresetValues(){
         presetDto1.setPresetId("1");
         presetDto1.setLight(lightDto1);
-        presetDto1.setOn(true);
+        presetDto1.setLighted(true);
 
         presetDto2.setPresetId("2");
         presetDto2.setLight(lightDto2);
-        presetDto2.setOn(true);
+        presetDto2.setLighted(true);
 
         presetDto3.setPresetId("3");
         presetDto3.setLight(lightDto3);
-        presetDto3.setOn(true);
+        presetDto3.setLighted(true);
 
         Collections.addAll(presetDtos,presetDto1,presetDto2,presetDto3);
         }

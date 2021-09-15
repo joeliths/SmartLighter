@@ -69,7 +69,7 @@ public class PresetController {
         List<PresetDto>presetDtos = new ArrayList<>();
         for(LightStateModel lightStateModel: presets){
             PresetDto presetDto = new PresetDto();
-            presetDto.setOn(lightStateModel.isOn());
+            presetDto.setLighted(lightStateModel.isOn());
             presetDto.setLight(lightService.findLightByLightId(lightStateModel.getLightId()));
             presetDtos.add(presetDto);
         }

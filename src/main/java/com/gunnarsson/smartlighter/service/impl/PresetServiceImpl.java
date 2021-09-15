@@ -2,7 +2,6 @@ package com.gunnarsson.smartlighter.service.impl;
 
 import com.gunnarsson.smartlighter.exceptions.PresetServiceException;
 import com.gunnarsson.smartlighter.io.entity.CollectionPresetEntity;
-import com.gunnarsson.smartlighter.io.entity.LightEntity;
 import com.gunnarsson.smartlighter.io.entity.PresetEntity;
 import com.gunnarsson.smartlighter.io.repositories.CollectionPresetRepository;
 import com.gunnarsson.smartlighter.io.repositories.LightRepository;
@@ -52,7 +51,7 @@ public class PresetServiceImpl implements PresetService {
     public PresetDto updatePreset(String id,PresetDto presetDto) {
         PresetEntity presetEntity = presetRepository.findPresetByPresetId(id);
         if (presetEntity == null) throw new PresetServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
-        presetEntity.setLighted(presetDto.isOn());
+        presetEntity.setLighted(presetDto.isLighted());
         PresetEntity updatedPreset = presetRepository.save(presetEntity);
         return new ModelMapper().map(updatedPreset,PresetDto.class);
     }
