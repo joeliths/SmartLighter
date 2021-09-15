@@ -64,15 +64,15 @@ public class PresetServiceImpl implements PresetService {
     }
 
     @Override
-    public CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPreset) {
+    public CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPresetDto) {
 
-        for(PresetDto presetDto:collectionPreset.getPresets()){
-            presetDto.setCollectionPreset(collectionPreset);
+        for(PresetDto presetDto:collectionPresetDto.getPresets()){
+            presetDto.setCollectionPreset(collectionPresetDto);
             presetDto.setPresetId(utils.generatePresetId(10));
         }
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        CollectionPresetEntity collectionPresetEntity = modelMapper.map(collectionPreset,CollectionPresetEntity.class);
+        CollectionPresetEntity collectionPresetEntity = modelMapper.map(collectionPresetDto,CollectionPresetEntity.class);
         collectionPresetEntity.setCollectionPresetId(utils.generateCollectionPresetId(10));
         CollectionPresetEntity savedCollection = collectionPresetRepository.save(collectionPresetEntity);
         return modelMapper.map(savedCollection,CollectionPresetDto.class);
