@@ -18,7 +18,7 @@ public class CollectionPresetEntity implements Serializable {
     @Column(nullable=false, length=30)
     private String collectionName;
 
-   @OneToMany(mappedBy="collectionPresetEntity",cascade = CascadeType.ALL)
+   @OneToMany(mappedBy="collectionPreset",cascade = CascadeType.ALL)
     private List<PresetEntity> presets;
 
     public String getCollectionName() {
