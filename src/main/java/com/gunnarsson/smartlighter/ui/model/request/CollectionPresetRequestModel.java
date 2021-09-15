@@ -3,7 +3,7 @@ package com.gunnarsson.smartlighter.ui.model.request;
 import java.util.List;
 import java.util.Set;
 
-public class PresetLightsRequestModel {
+public class CollectionPresetRequestModel {
     private String collectionName;
     private List<LightStateModel> presets;
 
