@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PresetService {
     CollectionPresetDto createCollectionPreset(CollectionPresetDto collectionPreset);
-    List<String> executePreset(String collectionPresetId);
+    List<String> executeCollectionPreset(String collectionPresetId);
     List<CollectionPresetDto> getAllCollectionPresets();
     PresetDto updatePreset(String id,PresetDto presetDto);
     void deleteLight(String collectionPresetId);

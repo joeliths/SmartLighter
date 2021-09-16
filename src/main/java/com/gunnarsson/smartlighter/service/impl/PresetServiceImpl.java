@@ -69,16 +69,16 @@ public class PresetServiceImpl implements PresetService {
             presetDto.setCollectionPreset(collectionPresetDto);
             presetDto.setPresetId(utils.generatePresetId(10));
         }
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        CollectionPresetEntity collectionPresetEntity = modelMapper.map(collectionPresetDto,CollectionPresetEntity.class);
+        //ModelMapper modelMapper = new ModelMapper();
+       // modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        CollectionPresetEntity collectionPresetEntity = new ModelMapper().map(collectionPresetDto,CollectionPresetEntity.class);
         collectionPresetEntity.setCollectionPresetId(utils.generateCollectionPresetId(10));
         CollectionPresetEntity savedCollection = collectionPresetRepository.save(collectionPresetEntity);
-        return modelMapper.map(savedCollection,CollectionPresetDto.class);
+        return new ModelMapper().map(savedCollection,CollectionPresetDto.class);
     }
 
     @Override
-    public List<String> executePreset(String collectionPresetId) {
+    public List<String> executeCollectionPreset(String collectionPresetId) {
         CollectionPresetEntity collectionPresetEntity = collectionPresetRepository.findPresetBycollectionPresetId(collectionPresetId);
         if (collectionPresetEntity == null) throw new PresetServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
         List<String> returnValue = new ArrayList<>();
