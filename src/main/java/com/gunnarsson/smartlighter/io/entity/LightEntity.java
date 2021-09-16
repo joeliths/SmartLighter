@@ -26,6 +26,8 @@ public class LightEntity implements Serializable {
     @JoinColumn(name="site_id")
     private SiteEntity site;
 
+    @OneToMany(mappedBy="light",cascade = CascadeType.ALL)
+    private List<PresetEntity> presets;
 
     public Long getId() {
         return id;
@@ -66,5 +68,9 @@ public class LightEntity implements Serializable {
     public void setSite(SiteEntity site) {
         this.site = site;
     }
+
+    public List<PresetEntity> getPresets() { return presets; }
+
+    public void setPresets(List<PresetEntity> presets) { this.presets = presets; }
 
 }
