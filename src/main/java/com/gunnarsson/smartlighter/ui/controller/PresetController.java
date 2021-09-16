@@ -5,7 +5,7 @@ import com.gunnarsson.smartlighter.service.PresetService;
 import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
 import com.gunnarsson.smartlighter.shared.dto.PresetDto;
 import com.gunnarsson.smartlighter.ui.model.request.LightStateModel;
-import com.gunnarsson.smartlighter.ui.model.request.PresetLightsRequestModel;
+import com.gunnarsson.smartlighter.ui.model.request.CollectionPresetRequestModel;
 import com.gunnarsson.smartlighter.ui.model.request.PresetRequestModel;
 import com.gunnarsson.smartlighter.ui.model.response.CollectionPresetResponseModel;
 import com.gunnarsson.smartlighter.ui.model.response.PresetResponseModel;
@@ -32,10 +32,10 @@ public class PresetController {
     PresetService presetService;
 
     @PostMapping(path = "collection",consumes= MediaType.APPLICATION_JSON_VALUE)
-    public CollectionPresetResponseModel createCollectionPreset(@RequestBody PresetLightsRequestModel presetLightsRequestModel){
+    public CollectionPresetResponseModel createCollectionPreset(@RequestBody CollectionPresetRequestModel collectionPresetRequestModel){
         CollectionPresetDto collectionPresetDto = new CollectionPresetDto();
-        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(presetLightsRequestModel.getPresets()));
-        collectionPresetDto.setCollectionName(presetLightsRequestModel.getCollectionName());
+        collectionPresetDto.setPresets(SetPresetsToCollectionPreset(collectionPresetRequestModel.getPresets()));
+        collectionPresetDto.setCollectionName(collectionPresetRequestModel.getCollectionName());
         CollectionPresetDto createdCollectionPreset = presetService.createCollectionPreset(collectionPresetDto);
         return new ModelMapper().map(createdCollectionPreset,CollectionPresetResponseModel.class);
     }
