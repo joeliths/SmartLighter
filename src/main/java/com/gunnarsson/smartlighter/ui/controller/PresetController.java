@@ -57,7 +57,7 @@ public class PresetController {
     }
 
     @DeleteMapping(path = "collection/{id}")
-    public Map<String, Boolean> deleteCollectionPreset (@PathVariable String collectionPresetId){
+    public Map<String, Boolean> deleteCollectionPreset (@PathVariable(value = "id") String collectionPresetId){
         presetService.deleteLight(collectionPresetId);
         Map<String, Boolean> response = new HashMap<>();
         response.put(collectionPresetId, Boolean.TRUE);
