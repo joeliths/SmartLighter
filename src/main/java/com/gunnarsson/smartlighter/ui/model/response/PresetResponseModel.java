@@ -4,7 +4,7 @@ package com.gunnarsson.smartlighter.ui.model.response;
 public class PresetResponseModel {
     private String presetId;
     private LightResponseModel light;
-    private boolean on;
+    private boolean lighted;
 
     public LightResponseModel getLight() {
         return light;
@@ -22,11 +22,11 @@ public class PresetResponseModel {
         this.presetId = presetId;
     }
 
-    public boolean isOn() {
-        return on;
+    public boolean isLighted() {
+        return lighted;
     }
 
-    public void setOn(boolean on) {
-        this.on = on;
+    public void setLighted(boolean lighted) {
+        this.lighted = lighted;
     }
 }

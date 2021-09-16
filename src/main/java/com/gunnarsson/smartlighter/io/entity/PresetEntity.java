@@ -30,7 +30,7 @@ public class PresetEntity implements Serializable {
     }
 
     public void setLighted(boolean lighted) {
-        lighted = lighted;
+        this.lighted = lighted;
     }
 
     public LightEntity getLight() {

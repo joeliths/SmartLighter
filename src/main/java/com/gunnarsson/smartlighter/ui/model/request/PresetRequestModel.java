@@ -1,11 +1,8 @@
 package com.gunnarsson.smartlighter.ui.model.request;
 
-import com.gunnarsson.smartlighter.shared.dto.CollectionPresetDto;
-import com.gunnarsson.smartlighter.shared.dto.LightDto;
-
 public class PresetRequestModel {
     private String presetId;
-    private boolean on;
+    private boolean lighted;
 
     public String getPresetId() {
         return presetId;
@@ -15,12 +12,12 @@ public class PresetRequestModel {
         this.presetId = presetId;
     }
 
-    public boolean isOn() {
-        return on;
+    public boolean isLighted() {
+        return lighted;
     }
 
-    public void setOn(boolean on) {
-        this.on = on;
+    public void setLighted(boolean lighted) {
+        this.lighted = lighted;
     }
 
 }
