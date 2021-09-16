@@ -56,6 +56,11 @@ public class PresetController {
         return collectionPresetResponseModelList;
     }
 
+    @GetMapping(path = "collection/{id}")
+    public List<String> executeCollectionPreset(@PathVariable(value = "id") String collectionPresetId){
+        return presetService.executeCollectionPreset(collectionPresetId);
+    }
+
     @DeleteMapping(path = "collection/{id}")
     public Map<String, Boolean> deleteCollectionPreset (@PathVariable(value = "id") String collectionPresetId){
         presetService.deleteLight(collectionPresetId);
