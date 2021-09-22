@@ -20,7 +20,8 @@ Spring-boot application with a 3-tier architecture. User can create lights and a
 ### Installing
 
 * Clone/download repository
-* Set your Mysql username and password in the application.properties file under root folder.
+* Set your Mysql username and password in the application.properties file under smart-lighter/src/main/resources/
+
 
 
 ### Executing program
